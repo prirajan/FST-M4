@@ -1,0 +1,29 @@
+# Create and use database 
+CREATE DATABASE office;
+use office;
+
+# Create employee table
+CREATE TABLE employee
+(id INT, name STRING, dept STRING, yoj INT, salary INT)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+TBLPROPERTIES("skip.header.line.count"="1");
+
+# Load data in to employee table
+LOAD DATA LOCAL INPATH '/root/EmpData.csv' INTO TABLE employee;
+
+# Run Employee table
+SELECT * from Employee;
+SELECT COUNT(*) from Employee;
+
+# Export output to HDFS directory
+INSERT OVERWRITE DIRECTORY '/user/priya/HiveOutput'
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+SELECT * FROM employee where dept='IT';
+
+# Export output to Local directory
+INSERT OVERWRITE LOCAL DIRECTORY '/root/priya/HiveOutput'
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+SELECT * FROM employee where dept='IT';
