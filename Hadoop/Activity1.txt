@@ -1,21 +1,21 @@
 #Create files in local directory and copy the content from slides
 
-$ vim root/txtFile.txt
+vim root/txtFile.txt
 
-$ vim root/csvFile.csv 
+vim root/csvFile.csv 
 
 # Make a folder on the HDFS
-$ hdfs dfs -mkdir /user/priya
+hdfs dfs -mkdir /user/priya
 
 # Copy the csvFile to HDFS directory
-$ hdfs dfs -put root/csvFile.csv /user/priya
+hdfs dfs -put root/csvFile.csv /user/priya
 
 # Copy the txtFile to HDFS directory
-$ hdfs dfs -put root/txtFile.txt /user/priya
+hdfs dfs -put root/txtFile.txt /user/priya
 
 # list the files in HDFS directory
 hdfs dfs -ls /user/priya
 
 # Stat command to get the file statistics
-$ hdfs dfs -stat "type:%F permissions:%a %u:%g size:%b name:%n" /user/priya/csvFile.csv
-$ hdfs dfs -stat "type:%F permissions:%a %u:%g size:%b name:%n" /user/priya/txtFile.txt
+hdfs dfs -stat "type:%F permissions:%a %u:%g size:%b name:%n" /user/priya/csvFile.csv
+hdfs dfs -stat "type:%F permissions:%a %u:%g size:%b name:%n" /user/priya/txtFile.txt
