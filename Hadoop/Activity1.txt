@@ -1,4 +1,4 @@
-#Create files in local directory
+#Create files in local directory and copy the content from slides
 
 $ vim root/txtFile.txt
 
