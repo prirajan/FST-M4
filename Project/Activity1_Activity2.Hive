@@ -1,0 +1,37 @@
+# Create table episodeIV
+CREATE TABLE episodeIV (Name STRING, Line STRING)ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' TBLPROPERTIES("skip.header.line.count"="2");
+
+# Load data to table from local path for episodeIV
+LOAD DATA LOCAL INPATH '/root/episodeIV_dialouges.txt' INTO TABLE episodeIV;
+
+# Run episodeIV table
+SELECT Name,COUNT(Name)As No_of_Lines from episodeIV GROUP BY Name ORDER BY No_of_Lines;
+
+# For episodeV
+CREATE TABLE episodeV (Name STRING, Line STRING)ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' TBLPROPERTIES("skip.header.line.count"="2");
+LOAD DATA LOCAL INPATH '/root/episodeV_dialouges.txt' INTO TABLE episodeV;
+SELECT Name,COUNT(Name)As No_of_Lines from episodeV GROUP BY Name ORDER BY No_of_Lines;
+
+# For episodeVI
+CREATE TABLE episodeVI (Name STRING, Line STRING)ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' TBLPROPERTIES("skip.header.line.count"="2");
+LOAD DATA LOCAL INPATH '/root/episodeVI_dialouges.txt' INTO TABLE episodeVI;
+SELECT Name,COUNT(Name)As No_of_Lines from episodeVI GROUP BY Name ORDER BY No_of_Lines;
+
+# Export output to HDFS directory for episodeIV
+INSERT OVERWRITE DIRECTORY '/user/priya/project/HiveActivity1Output'
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t'
+SELECT Name,COUNT(Name)As No_of_Lines from episodeIV GROUP BY Name ORDER BY No_of_Lines DESC;
+
+# Export output to Local directory for episodeIV
+INSERT OVERWRITE LOCAL DIRECTORY '/root/HiveActivity1Output'
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t'
+SELECT Name,COUNT(Name)As No_of_Lines from episodeIV GROUP BY Name ORDER BY No_of_Lines DESC;
+
+#Actvity2
+SELECT COUNT(*) from episodeIV WHERE INSTR(line, 'Luke')>0;
+
+# Export output to HDFS directory
+INSERT OVERWRITE DIRECTORY '/user/priya/project/HiveActivity2Output'
+SELECT COUNT(*) from episodeIV WHERE INSTR(line, 'Luke')>0;
